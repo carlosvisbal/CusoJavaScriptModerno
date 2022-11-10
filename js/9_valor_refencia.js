@@ -1,48 +1,48 @@
 
-// Todos los objetos se pasan por refencia menos los primitivos que se pasan por valor.
 let a = 10
-let b = a
+let b =10
 
-a = 50
+console.log({a, b});
 
-console.log({a , b});
-
-let juan = {
-    nombre:'Juan'
-}
-// Cuando se utilizan los tres puentos fuera de la funcion para unirlos todos en un arreglo este toma como nombre el de spread(...) y separa los objetos para obtener uno totalmente independiente del otro
+//Todos los objetos se pasan por refencia menos los primitivos. 
+let juan = {nombre:'Juan'}
+// Se le llama operador spread (...) cuando se utiliza para romper la referencia de un objeto
 let ana = {...juan}
-ana.nombre = 'Ana'
-// Con el operados spread(...) se rompre la referencia de objetos para obtener uno totalmente independiente del otro(No se modifica el inicial)
+ana.nombre= 'ana'
 console.log({juan, ana});
 
-
-const cambiarNombre = ({...persona}) => {
-    persona.nombre = 'Keren'
+// incluso si se cambia por una funcion felcha sigue teniendo el mismo resultado se psa la referencia
+// Se le llama operador rest(...) cuando se coloca para unir todos los parametros y convertirlos en un arreglo
+// const cambiarNombre = ({...persona}) =>{
+//     persona.nombre = 'Tony'
+//     return persona
+// }
+const cambiarNombre = ({...persona}) =>{
+    persona.nombre = 'Tony'
     return persona
 }
 
-let oso = { nombre:'Julio'}
+let peter = {nombre:'Peter'}
+let tony = cambiarNombre(peter)
 
-let keren = cambiarNombre(oso)
-
-console.log({oso, keren});
+console.log({peter , tony});
 
 
-//Areglos Romper la referencia de (objetos)
-const frutas = ['Manzana', 'Mango' , 'Pera']
+const frutas = ['Manzana', 'Pera', 'Pinha']
 
-console.time('slice');
-//Nuevo arreglo utilizando slice
-const otrasFrutas2 = frutas.slice()
-console.timeEnd('slice');
+// Usando el operador spread
+// Tomar tiempo en romper la referencia con slice
+console.time('spread')
+const otrsFrutas = [...frutas]
+console.timeEnd('spread')
 
-console.time('spread');
-//Nuevo arreglo utilizando spread
-const otrasFrutas = [...frutas]
-console.timeEnd('spread');
+// Usando slice
+// Tomar tiempo en romper la referencia con slice
+console.time('slicer')
+const otrsFrutasdos = frutas.slice()
+console.timeEnd('slicer')
 
-otrasFrutas.push('Fresas')
-otrasFrutas2.push('sandia')
-console.table({frutas, otrasFrutas, otrasFrutas2})
-console.log({frutas, otrasFrutas});
+otrsFrutasdos.push('Fresa')
+console.log({otrsFrutasdos})
+otrsFrutas.push('Mango')
+console.log({frutas, otrsFrutas})
